@@ -18,6 +18,7 @@ receipt와 수정 사항이 들어 있으며, 2026년 11월 10일자 x86_64 cook
 | GTK3 프로그램 (Firefox ESR, TazTerm, LXTaz 도구) | 됨 (kime GTK3 모듈) |
 | 그 밖의 X11 프로그램 | 됨 (XIM) |
 | Qt5 / Qt6 프로그램 (예: qBittorrent) | 안 됨: Qt 모듈은 빌드하지 않음 (아래 참고). 다른 곳에서 입력한 뒤 붙여넣기 |
+| Telegram Desktop (공식 바이너리) | 안 됨: 자체 Qt를 내장. 대신 Firefox에서 Telegram Web 사용 (테스트 안 함) |
 | Wayland | 안 됨 (SliTaz 5.1은 Xorg 사용) |
 | 한글 / 한자 / 이모지 | 한글은 테스트 완료. 한자와 이모지는 kime 후보 창을 사용 (빌드됨, 테스트 안 함) |
 
@@ -46,7 +47,7 @@ guest/kime-session.sh       kime 환경 변수와 자동 시작 설정
 
 ## 방법 A: 미리 빌드된 패키지 설치
 
-이 저장소의 **Releases** 페이지에 패키지가 있으면
+[v3.2.0-1 릴리스](https://github.com/Otrona/slitaz-kime/releases/tag/v3.2.0-1)에서
 `kime-3.2.0-x86_64.tazpkg`와 `fonts-kr-1.0-any.tazpkg`를 내려받은 뒤,
 root로 실행합니다:
 

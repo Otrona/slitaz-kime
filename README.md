@@ -16,6 +16,7 @@ work, tested on the x86_64 cooking ISO of 10 November 2026.
 | GTK3 apps (Firefox ESR, TazTerm, the LXTaz tools) | yes, through kime's GTK3 module |
 | Other X11 apps | yes, through XIM |
 | Qt5 / Qt6 apps (e.g. qBittorrent) | no: the Qt modules are not built (see below); type elsewhere and paste |
+| Telegram Desktop (official binary) | no: it bundles its own Qt; use Telegram Web in Firefox instead (not tested) |
 | Wayland | no (SliTaz 5.1 uses Xorg) |
 | Hangul / Hanja / emoji | Hangul tested; Hanja and emoji use kime's candidate window (built, not tested) |
 
@@ -44,7 +45,7 @@ guest/kime-session.sh       sets up the environment and autostart for kime
 
 ## Option A: install prebuilt packages
 
-If this repo's **Releases** page has the packages, download
+Download from the [v3.2.0-1 release](https://github.com/Otrona/slitaz-kime/releases/tag/v3.2.0-1)
 `kime-3.2.0-x86_64.tazpkg` and `fonts-kr-1.0-any.tazpkg`, then as root:
 
 ```sh
