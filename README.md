@@ -154,8 +154,8 @@ Rust receipt details:
 - It uses the **`.tar.gz`** tarball: busybox `unxz` reports "corrupted data"
   on Rust's `.tar.xz`.
 - Cook's **strip** step damages `librustc_driver` (158 MB → 136 MB) and
-  `rustc` then segfaults. The receipt sets `COOKOPTS="!strip"` (**not yet
-  verified**: after cooking, check the file is still ~158 MB). If `rustc`
+  `rustc` then segfaults. The receipt sets `COOKOPTS="!strip"`, which
+  keeps the file at ~158 MB (verified). If `rustc` still
   segfaults, unpack the tarball from `/home/slitaz/src` and run its
   `./install.sh --prefix=/usr --without=rust-docs --disable-ldconfig`.
 

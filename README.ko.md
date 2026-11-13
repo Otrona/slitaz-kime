@@ -160,8 +160,8 @@ Rust receipt 참고 사항:
   "corrupted data" 오류를 냅니다.
 - cook의 **strip** 단계가 `librustc_driver`를 손상시켜(158 MB → 136 MB)
   `rustc`가 segfault로 종료됩니다. receipt에 `COOKOPTS="!strip"`을
-  넣었지만 **아직 검증하지 않았습니다**. cook 후 파일 크기가 약 158 MB인지
-  확인하세요. `rustc`가 segfault로 끝나면 `/home/slitaz/src`의 tarball을
+  넣어 파일 크기가 약 158 MB로 유지되는 것을 확인했습니다.
+  그래도 `rustc`가 segfault로 끝나면 `/home/slitaz/src`의 tarball을
   풀고 `./install.sh --prefix=/usr --without=rust-docs --disable-ldconfig`
   를 실행하면 됩니다.
 
