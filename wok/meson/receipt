@@ -1,0 +1,32 @@
+# SliTaz package receipt.
+
+PACKAGE="meson"
+VERSION="1.5.2"
+CATEGORY="development"
+SHORT_DESC="The Meson build system (newer than the 5.1 repository)"
+MAINTAINER="nanotron@gmx.com"
+LICENSE="Apache"
+WEB_SITE="https://mesonbuild.com"
+
+TARBALL="$PACKAGE-$VERSION.tar.gz"
+WGET_URL="https://github.com/mesonbuild/meson/releases/download/$VERSION/$TARBALL"
+
+# 1.5.2 is the newest meson that still runs on SliTaz's Python 3.8
+DEPENDS="python3 ninja"
+
+compile_rules() {
+	# Pure Python: install the source tree and a small launcher,
+	# no setuptools needed
+	mkdir -p $DESTDIR/usr/lib/meson $DESTDIR/usr/bin
+	cp -a $src/mesonbuild $src/meson.py $DESTDIR/usr/lib/meson/
+	cat > $DESTDIR/usr/bin/meson << 'EOF'
+#!/bin/sh
+exec python3 /usr/lib/meson/meson.py "$@"
+EOF
+	chmod +x $DESTDIR/usr/bin/meson
+}
+
+genpkg_rules() {
+	mkdir -p $fs
+	cp -a $install/* $fs
+}

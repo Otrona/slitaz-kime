@@ -1,0 +1,33 @@
+#!/bin/sh
+# get-fonts-kr: collect Korean fonts for the SliTaz fonts-kr package.
+#
+# - Noto Sans KR and Noto Serif KR (Regular + Bold): Korean-only subsets
+#   from the official noto-cjk repository
+# - NanumSquare (Regular + Bold): copied from the host if installed
+#   (Debian/Ubuntu package: fonts-nanum-extra)
+#
+# Result: ~/tmp/fonts-kr/ and ~/tmp/fonts-kr.tar
+set -e
+OUT=~/tmp/fonts-kr
+BASE=https://github.com/notofonts/noto-cjk/raw/main
+mkdir -p "$OUT"
+
+for f in Sans/SubsetOTF/KR/NotoSansKR-Regular.otf \
+         Sans/SubsetOTF/KR/NotoSansKR-Bold.otf \
+         Serif/SubsetOTF/KR/NotoSerifKR-Regular.otf \
+         Serif/SubsetOTF/KR/NotoSerifKR-Bold.otf; do
+	echo "Downloading $(basename "$f")"
+	curl -fL --retry 3 -o "$OUT/$(basename "$f")" "$BASE/$f"
+done
+
+N=/usr/share/fonts/truetype/nanum
+if [ -f $N/NanumSquareR.ttf ] && [ -f $N/NanumSquareB.ttf ]; then
+	cp $N/NanumSquareR.ttf $N/NanumSquareB.ttf "$OUT/"
+else
+	echo "NanumSquare not found in $N (install fonts-nanum-extra); skipped." >&2
+fi
+
+file "$OUT"/* | grep -v -i -E 'font|OpenType|TrueType' && echo "WARNING: not all files are fonts" || true
+ls -lh "$OUT"
+tar cf ~/tmp/fonts-kr.tar -C ~/tmp fonts-kr
+echo "Packed: ~/tmp/fonts-kr.tar"

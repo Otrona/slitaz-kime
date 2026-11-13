@@ -1,0 +1,44 @@
+# SliTaz package receipt.
+
+PACKAGE="kime"
+VERSION="3.2.0"
+CATEGORY="x-window"
+SHORT_DESC="Korean input method (XIM and GTK3 module)"
+MAINTAINER="nanotron@gmx.com"
+LICENSE="GPL3"
+WEB_SITE="https://github.com/Riey/kime"
+
+TARBALL="$PACKAGE-$VERSION.tar.gz"
+WGET_URL="https://github.com/Riey/kime/archive/refs/tags/v$VERSION.tar.gz"
+
+DEPENDS="gtk+3 dbus fontconfig freetype libxcb"
+# Install the meson and rust packages from this repo before cooking:
+# otherwise cook pulls the repository's meson 0.62.2 (kime needs >= 1.1)
+BUILD_DEPENDS="rust python3 meson ninja pkg-config \
+	gtk+3-dev dbus-dev fontconfig-dev freetype-dev libxcb-dev"
+
+compile_rules() {
+	cd $src
+	# bindgen is declared but unused (build.rs only calls cbindgen).
+	# Dropping it avoids needing libclang, which SliTaz does not ship.
+	sed -i '/^bindgen = /d' src/engine/capi/Cargo.toml
+	# Limit parallel Rust jobs to keep memory use down
+	export CARGO_BUILD_JOBS=4
+	# cpp_std=none: only the (disabled) Qt modules are C++, and
+	# GCC 6.3 cannot do kime's default C++20
+	meson setup build --prefix=/usr --libdir=lib \
+		-Dcpp_std=none \
+		-Dgtk3=enabled -Dgtk4=disabled -Dqt5=disabled -Dqt6=disabled \
+		-Dwayland=disabled -Dxim=enabled &&
+	ninja -C build &&
+	DESTDIR=$DESTDIR ninja -C build install
+}
+
+genpkg_rules() {
+	mkdir -p $fs
+	cp -a $install/* $fs
+}
+
+post_install() {
+	chroot "$1/" gtk-query-immodules-3.0 --update-cache
+}

@@ -1,0 +1,23 @@
+# SliTaz package receipt.
+#
+# The font files are not in this repo. Collect them with host/get-fonts-kr
+# and put them in /home/slitaz/wok/fonts-kr/stuff/fonts/ before cooking.
+
+PACKAGE="fonts-kr"
+VERSION="1.0"
+CATEGORY="fonts"
+SHORT_DESC="Korean fonts: Noto Sans KR, Noto Serif KR, NanumSquare"
+MAINTAINER="nanotron@gmx.com"
+LICENSE="OFL"
+WEB_SITE="https://github.com/notofonts/noto-cjk"
+
+DEPENDS="fontconfig"
+
+genpkg_rules() {
+	mkdir -p $fs/usr/share/fonts/kr
+	cp -a $stuff/fonts/* $fs/usr/share/fonts/kr/
+}
+
+post_install() {
+	chroot "$1/" fc-cache -f
+}

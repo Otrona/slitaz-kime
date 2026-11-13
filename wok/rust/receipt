@@ -1,0 +1,31 @@
+# SliTaz package receipt.
+
+PACKAGE="rust"
+VERSION="1.99.1"
+CATEGORY="development"
+SHORT_DESC="Rust compiler and cargo (official x86_64 binaries)"
+MAINTAINER="nanotron@gmx.com"
+LICENSE="MIT Apache"
+WEB_SITE="https://www.rust-lang.org"
+
+# .tar.gz, not .tar.xz: busybox unxz reports "corrupted data" on the .xz
+TARBALL="rust-$VERSION-x86_64-unknown-linux-gnu.tar.gz"
+WGET_URL="https://static.rust-lang.org/dist/$TARBALL"
+
+DEPENDS="gcc"
+
+# Cook's strip step breaks librustc_driver (rustc then segfaults).
+# Not yet verified that this option prevents it: after cooking, check that
+# /usr/lib/librustc_driver-*.so is ~158 MB (stripped: ~136 MB).
+COOKOPTS="!strip"
+
+compile_rules() {
+	cd $src
+	./install.sh --prefix=/usr --destdir=$DESTDIR \
+		--without=rust-docs --disable-ldconfig
+}
+
+genpkg_rules() {
+	mkdir -p $fs
+	cp -a $install/* $fs
+}
