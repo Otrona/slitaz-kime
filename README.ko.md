@@ -88,6 +88,9 @@ Rust와 kime 빌드에는 **RAM 약 8 GB**, **디스크 여유 공간 약 6 GB**
 
 ### 2. meson, Rust, kime 빌드 (root)
 
+meson과 Rust를 직접 빌드하지 않으려면(약 7분, 1.8 GB 필요)
+[slitaz-rust-meson](https://github.com/Otrona/slitaz-rust-meson/releases/latest)의 미리 빌드된 패키지를 설치하면 됩니다.
+
 ```sh
 cp -r wok/meson wok/rust wok/kime /home/slitaz/wok/
 

@@ -83,6 +83,9 @@ builds.
 
 ### 2. Cook meson, Rust and kime (root)
 
+To skip cooking meson and Rust (about 7 minutes and 1.8 GB), install the
+prebuilt packages from [slitaz-rust-meson](https://github.com/Otrona/slitaz-rust-meson/releases/latest) instead.
+
 ```sh
 cp -r wok/meson wok/rust wok/kime /home/slitaz/wok/
 
