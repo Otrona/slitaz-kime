@@ -181,6 +181,8 @@ Build logs are in `/home/slitaz/log/<package>.log`.
 
 ## Licenses
 
+The scripts and receipts in this repository are licensed under GPL-3.0 (see [LICENSE](LICENSE)).
+
 kime is GPL-3.0-or-later. Noto CJK and NanumSquare are under the SIL Open
 Font License 1.1. Rust is MIT/Apache-2.0, meson Apache-2.0.
 

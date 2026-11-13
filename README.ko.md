@@ -186,6 +186,8 @@ kime의 `system_engine` 옵션이 필요해서 여기서는 시도하지 않았�
 
 ## 라이선스
 
+이 저장소의 스크립트와 receipt는 GPL-3.0 라이선스를 따릅니다 ([LICENSE](LICENSE) 참고).
+
 kime는 GPL-3.0-or-later, Noto CJK와 나눔스퀘어는 SIL Open Font License 1.1,
 Rust는 MIT/Apache-2.0, meson은 Apache-2.0입니다.
 
