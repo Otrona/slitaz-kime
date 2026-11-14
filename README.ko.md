@@ -68,6 +68,13 @@ Live 시스템은 전체가 RAM에서 실행됩니다. kime는 자동으로 실�
 **오른쪽 Alt**로 한글로 전환합니다. 공식 firefox ISO에는 없는 Realtek
 Wi-Fi 6/6E/7 무선랜 펌웨어(rtw89)도 두 ISO에 들어 있습니다.
 
+**로그인:** 로그인 화면이 나오면(예: 로그아웃한 뒤) 사용자는 `tux`,
+비밀번호는 `tux`입니다. 관리자는 `root`, 비밀번호는 `root`입니다.
+
+확인한 것: QEMU(BIOS)와 ThinkPad E14 Gen 3(UEFI, Ventoy)에서 부팅, 한글 입력,
+무선랜. 아직 확인하지 않은 것: 이 ISO로 하드디스크 설치(`tazinst`), 한자와
+이모지 입력, Telegram 웹.
+
 ## 방법 B: 패키지 설치
 
 이미 SliTaz 5.1 x86_64를 쓰고 있다면,

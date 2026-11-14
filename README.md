@@ -66,6 +66,14 @@ The live system runs entirely from RAM. kime starts by itself: press
 **Right Alt** to switch to Hangul. Both ISOs also include the firmware for
 Realtek Wi-Fi 6/6E/7 cards (rtw89), which the official firefox ISO lacks.
 
+**Login:** if a login screen appears (for example after logging out), the
+user is `tux` with the password `tux`, and the administrator is `root` with
+the password `root`.
+
+Tested: booting in QEMU (BIOS) and on a ThinkPad E14 Gen 3 (UEFI, Ventoy),
+Hangul input, Wi-Fi. Not tested yet: installing to disk from these ISOs
+(`tazinst`), Hanja and emoji input, Telegram Web.
+
 ## Option B: install the packages
 
 On an existing SliTaz 5.1 x86_64 system, download from the
