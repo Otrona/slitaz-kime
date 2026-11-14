@@ -1,0 +1,42 @@
+# SliTaz package receipt.
+
+PACKAGE="libreoffice"
+VERSION="7.6.7.2"
+CATEGORY="office"
+SHORT_DESC="LibreOffice office suite (official x86-64 binaries)"
+MAINTAINER="nanotron@gmx.com"
+LICENSE="MPL2"
+WEB_SITE="https://www.libreoffice.org"
+
+# 7.6 is the last release that runs on glibc 2.17+; 24.2 and newer need 2.27
+# (SliTaz 5.1 has 2.20). No longer updated upstream.
+TARBALL="LibreOffice_${VERSION}_Linux_x86-64_rpm.tar.gz"
+WGET_URL="http://downloadarchive.documentfoundation.org/libreoffice/old/$VERSION/rpm/x86_64/$TARBALL"
+
+DEPENDS="libcups nss nspr"
+
+# The official binaries are already stripped
+COOKOPTS="!strip"
+
+compile_rules() {
+	mkdir -p $DESTDIR
+	for r in $(find $src -name '*.rpm'); do
+		# Skip KDE/GNOME integration and the test suite. The GTK3 plugin
+		# (gnome-integration) crashes on SliTaz 5.1, so use the X11 one.
+		basename $r | grep -qiE 'kde|gnome|test' && continue
+		(cd $DESTDIR && rpm2cpio $r | cpio -idm) || return 1
+	done
+	# X11 plugin + kime over XIM: the LXTaz session sets no XMODIFIERS,
+	# so the launcher sets it (only when unset)
+	sed -i '1a\
+export SAL_USE_VCLPLUGIN=${SAL_USE_VCLPLUGIN:-gen}\
+export XMODIFIERS=${XMODIFIERS:-@im=kime}' $DESTDIR/opt/libreoffice7.6/program/soffice
+	mkdir -p $DESTDIR/usr/bin
+	ln -sf /opt/libreoffice7.6/program/soffice $DESTDIR/usr/bin/libreoffice
+	ln -sf /opt/libreoffice7.6/program/soffice $DESTDIR/usr/bin/soffice
+}
+
+genpkg_rules() {
+	mkdir -p $fs
+	cp -a $install/* $fs
+}

@@ -1,0 +1,9 @@
+# System default favorites for lxtaz-dock and lxtaz-dash: one desktop-id
+# per line, top = leftmost. A user copy in ~/.config/lxtaz/favorites takes
+# over (written on the first change). Distro flavors overlay this file to
+# add their browser.
+tazterm.desktop
+lxtaz-files.desktop
+firefox-official.desktop
+tazhelper.desktop
+filature-report.desktop

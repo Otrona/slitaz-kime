@@ -1,0 +1,20 @@
+# SliTaz flavor receipt.
+
+FLAVOR="kime-office-x86_64"
+SHORT_DESC="x86_64 LXDE desktop with Firefox ESR, LibreOffice and kime Korean input."
+VERSION="20260918"
+MAINTAINER="pankso@slitaz.org"
+COMPRESSION="lzma"
+
+# core-x86_64 with a real browser: firefox-official replaces midori and
+# webkit2gtk (and their orphans), plus what only made sense without it or
+# on older hardware: dillo, epdfview/poppler (Firefox renders PDF), beaver,
+# cdparanoia/libcddb (no optical drive), isapnptools, 915resolution.
+# Literal packages.list (metier does no DEPENDS resolution): closure
+# checked against the x86_64 cooking index.
+ARCH="x86_64"
+
+FRUGAL_RAM=""
+ROOTFS_SIZE=""
+INITRAMFS_SIZE=""
+ISO_SIZE=""

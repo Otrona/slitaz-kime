@@ -1,19 +1,23 @@
 #!/bin/sh
-# Set up kime for the desktop session. Run as root after installing the
-# kime package. Optional argument: the desktop user (default: tux).
-U=${1:-tux}
+# Set up kime system-wide on SliTaz 5.1. Run as root after installing the
+# kime and fonts-kr packages.
+#
+# - kime starts by itself: its package installs /etc/xdg/autostart/kime.desktop,
+#   which the LXTaz session runs.
+# - Environment files (/etc/profile.d) are not read by the LXTaz session, and
+#   GTK3 apps pick kime's module without GTK_IM_MODULE anyway.
+# - kime looks for "Noto Sans CJK KR" (fallback D2Coding) for its XIM preedit
+#   and Hanja candidate windows; fonts-kr installs "Noto Sans KR", so point
+#   kime at it. Settings left out keep their defaults (Right Alt toggle etc).
 
-# Environment for every program started in the session
-printf 'export GTK_IM_MODULE=kime\nexport XMODIFIERS=@im=kime\n' > /etc/profile.d/kime.sh
+mkdir -p /etc/xdg/kime
+cat > /etc/xdg/kime/config.yaml << 'YAML'
+engine:
+  xim_preedit_font: [Noto Sans KR, 15.0]
+  candidate_font: Noto Sans KR
+YAML
 
-# Start kime with the Openbox session
-A=/home/$U/.config/openbox/autostart.sh
-mkdir -p "$(dirname "$A")"
-grep -q '^kime' "$A" 2>/dev/null || echo 'kime &' >> "$A"
-chown -R "$U" "/home/$U/.config/openbox"
-
-# Register the GTK3 input module (the package does this too)
+# Register the GTK3 input module (the kime package does this too)
 gtk-query-immodules-3.0 --update-cache
 
-echo "kime is set up for $U."
-echo "Log out and back in, then press Right Alt to switch to Hangul."
+echo "kime is set up. Log out and back in, then press Right Alt to switch to Hangul."

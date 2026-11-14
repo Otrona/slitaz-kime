@@ -1,0 +1,9 @@
+
+  SliTaz GNU/Linux  ·  slitaz.org
+
+  Admin          trame-tui    configure your system
+  Packages       spk-tui      manage system packages        
+  Edit & Files   nano         text editor
+
+  Live session: changes are kept in RAM and lost on reboot.
+
