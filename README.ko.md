@@ -101,11 +101,6 @@ fontconfig, freetype, libxcb, LibreOffice는 libcups, nss, nspr)는 tazpkg가
 ### 1. 준비 (root)
 
 ```sh
-# 미러: 설치된 5.1 시스템에서는 busybox wget이 HTTPS 미러에 접속할 때
-# "Connection reset by peer" 오류가 납니다. HTTP를 사용하세요:
-echo http://mirror.slitaz.org/x86_64/cooking/packages/ > /var/lib/tazpkg/mirror
-tazpkg recharge
-
 # 설치 프로그램은 cookutils를 설치하지 않습니다
 tazpkg get-install cookutils
 cook setup
@@ -284,7 +279,7 @@ kime의 `system_engine` 옵션이 필요해서 여기서는 시도하지 않았�
 |---|---|---|
 | `CPU you selected does not support x86-64` | `cook.conf`의 i486 설정 | `guest/fix-cook-conf.sh` |
 | `Command 'cook' not found` | cookutils 미설치 | `tazpkg get-install cookutils` |
-| tazpkg: `Recharging failed`, `Connection reset by peer` | busybox wget과 HTTPS 미러 문제 | `http://` 미러 사용 |
+| tazpkg: `Recharging failed`, `Connection reset by peer` | 일시적인 네트워크 문제 (한 번 발생) | 잠시 후 다시 시도하거나, 당분간 `http://` 미러 사용 |
 | `meson_version >= 1.1` | 저장소의 meson 0.62.2가 쓰임 | `wok/meson`을 먼저 설치 |
 | rust: `unxz: corrupted data` | busybox unxz와 `.tar.xz` 문제 | `.tar.gz` 사용 (receipt에 반영됨) |
 | `rustc`는 segfault, `cargo`는 동작 | cook이 `librustc_driver`를 strip함 | 위 Rust 참고 사항 |

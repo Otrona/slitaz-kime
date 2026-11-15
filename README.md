@@ -100,11 +100,6 @@ the mirror.
 ### 1. Prerequisites (root)
 
 ```sh
-# Mirror: on an installed 5.1 system, busybox wget gets
-# "Connection reset by peer" from the HTTPS mirror. Use plain HTTP:
-echo http://mirror.slitaz.org/x86_64/cooking/packages/ > /var/lib/tazpkg/mirror
-tazpkg recharge
-
 # cookutils is not installed by the installer
 tazpkg get-install cookutils
 cook setup
@@ -281,7 +276,7 @@ not attempted here.
 |---|---|---|
 | `CPU you selected does not support x86-64` | i486 values in `cook.conf` | `guest/fix-cook-conf.sh` |
 | `Command 'cook' not found` | cookutils not installed | `tazpkg get-install cookutils` |
-| tazpkg: `Recharging failed`, `Connection reset by peer` | busybox wget vs. the HTTPS mirror | use the `http://` mirror |
+| tazpkg: `Recharging failed`, `Connection reset by peer` | a passing network problem (seen once) | retry later, or use the `http://` mirror for a while |
 | `meson_version >= 1.1` | the repository's meson 0.62.2 was used | install `wok/meson` first |
 | rust: `unxz: corrupted data` | busybox unxz vs. `.tar.xz` | use the `.tar.gz` (the receipt does) |
 | `rustc` segfaults, `cargo` works | cook stripped `librustc_driver` | see the Rust notes above |
